@@ -1,2 +1,2 @@
-dependencies: /Users/wong/Desktop/Conways/ios/Conways/main.m \
-  /Users/wong/Desktop/Conways/ios/Conways/AppDelegate.h
+dependencies: /Users/jlhall/Dropbox/dbc/Conways/ios/Conways/main.m \
+  /Users/jlhall/Dropbox/dbc/Conways/ios/Conways/AppDelegate.h

@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Image/RCTResizeMode.m \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Image/RCTResizeMode.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Image/RCTResizeMode.m \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Image/RCTResizeMode.h \
   ../../React/Base/RCTConvert.h ../../React/Layout/Layout.h \
   ../../React/Views/RCTAnimationType.h \
   ../../React/Views/RCTBorderStyle.h \

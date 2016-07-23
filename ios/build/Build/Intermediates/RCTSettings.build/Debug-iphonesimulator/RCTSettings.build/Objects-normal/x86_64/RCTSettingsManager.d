@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Settings/RCTSettingsManager.m \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Settings/RCTSettingsManager.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Settings/RCTSettingsManager.m \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Settings/RCTSettingsManager.h \
   ../../React/Base/RCTBridgeModule.h ../../React/Base/RCTDefines.h \
   ../../React/Base/RCTBridge.h ../../React/Base/RCTBridgeDelegate.h \
   ../../React/Base/RCTFrameUpdate.h ../../React/Base/RCTInvalidating.h \

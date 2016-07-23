@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTTextField.m \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTTextField.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTTextField.m \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTTextField.h \
   ../../React/Views/RCTComponent.h ../../React/Base/RCTConvert.h \
   ../../React/Layout/Layout.h ../../React/Views/RCTAnimationType.h \
   ../../React/Views/RCTBorderStyle.h \

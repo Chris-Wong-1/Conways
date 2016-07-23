@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTTextViewManager.m \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTTextViewManager.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTTextViewManager.m \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTTextViewManager.h \
   ../../React/Views/RCTViewManager.h ../../React/Base/RCTBridgeModule.h \
   ../../React/Base/RCTDefines.h ../../React/Base/RCTConvert.h \
   ../../React/Layout/Layout.h ../../React/Views/RCTAnimationType.h \
@@ -14,5 +14,5 @@ dependencies: \
   ../../React/Base/RCTJavaScriptExecutor.h \
   ../../React/Views/UIView+React.h ../../React/Views/RCTComponent.h \
   ../../React/Views/RCTShadowView.h ../../React/Base/RCTRootView.h \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTTextView.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTTextView.h \
   ../../React/Views/RCTView.h
