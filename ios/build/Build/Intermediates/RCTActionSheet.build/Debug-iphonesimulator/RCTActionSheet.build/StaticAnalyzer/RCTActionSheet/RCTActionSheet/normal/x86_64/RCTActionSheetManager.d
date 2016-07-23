@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheetManager.m \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheetManager.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheetManager.m \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheetManager.h \
   ../../React/Base/RCTBridge.h ../../React/Base/RCTBridgeDelegate.h \
   ../../React/Base/RCTBridgeModule.h ../../React/Base/RCTDefines.h \
   ../../React/Base/RCTFrameUpdate.h ../../React/Base/RCTInvalidating.h \

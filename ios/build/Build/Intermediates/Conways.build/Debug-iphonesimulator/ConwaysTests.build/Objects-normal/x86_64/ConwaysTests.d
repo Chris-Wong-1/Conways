@@ -1,4 +1,5 @@
-dependencies: /Users/wong/Desktop/Conways/ios/ConwaysTests/ConwaysTests.m \
+dependencies: \
+  /Users/jlhall/Dropbox/dbc/Conways/ios/ConwaysTests/ConwaysTests.m \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/Modules/module.modulemap \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/Headers/XCUIRemote.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework/Headers/XCUIKeyboardKeys.h \

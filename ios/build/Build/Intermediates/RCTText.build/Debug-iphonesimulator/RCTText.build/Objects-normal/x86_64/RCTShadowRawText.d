@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTShadowRawText.m \
-  /Users/wong/Desktop/Conways/node_modules/react-native/Libraries/Text/RCTShadowRawText.h \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTShadowRawText.m \
+  /Users/jlhall/Dropbox/dbc/Conways/node_modules/react-native/Libraries/Text/RCTShadowRawText.h \
   ../../React/Views/RCTShadowView.h ../../React/Layout/Layout.h \
   ../../React/Views/RCTComponent.h ../../React/Base/RCTRootView.h \
   ../../React/Base/RCTBridge.h ../../React/Base/RCTBridgeDelegate.h \
