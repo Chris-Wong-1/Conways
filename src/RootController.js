@@ -3,7 +3,7 @@ import {
   AppRegistry
 } from 'react-native';
 
-import LaunchScene from './src/components/scenes/LaunchScene'
+import LaunchScene from './components/scenes/LaunchScene'
 
 class RootController extends Component {
   render() {

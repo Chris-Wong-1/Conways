@@ -1,0 +1,37 @@
+dependencies: \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Modules/RCTUIManager.m \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Modules/RCTUIManager.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTJavaScriptExecutor.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTViewManager.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Layout/Layout.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/UIView+React.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTComponent.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTRootView.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Modules/RCTAccessibilityManager.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTComponentData.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTModuleData.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTModuleMethod.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTBridgeMethod.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTNullability.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTRootShadowView.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTShadowView.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTRootViewInternal.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTScrollableProtocol.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/wong/Desktop/Conways/node_modules/react-native/React/Views/RCTView.h

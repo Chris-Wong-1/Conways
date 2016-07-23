@@ -9,7 +9,7 @@ import RootController from './src/RootController'
 class Conways extends Component {
   render() {
     return (
-      
+      <RootController/>
     );
   }
 }
