@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import {WebView, Image, View} from 'react-native';
 import CanvasSource from '../utils/CanvasSource';
-import CanvasJS from '../utils/CanvasJS'
-// var {
-//   View,
-//   WebView
-// } = React;
 
 class Canvas extends Component {
   render() {
