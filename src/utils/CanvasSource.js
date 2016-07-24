@@ -1,1 +1,1 @@
-export default '<body> <button id="start">Push me</button> <div id="wrapper"></div></body>';
+export default '<body id="bod"><canvas id="canvas"></canvas></body>';
