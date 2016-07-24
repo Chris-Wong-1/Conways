@@ -1,1 +1,1 @@
-export default '<html><body><h1>Canvas source test</h1></body></html>';
+export default '<canvas id="c" width="1512" height="1512"></canvas>';
