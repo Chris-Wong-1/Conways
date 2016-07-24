@@ -9,10 +9,7 @@ import MenuButton from '../MenuButton'
 class GameScene extends Component {
   render() {
     return (
-      <View>
         <GameCanvas/>
-        <MenuButton/>
-      </View>
     );
   }
 }

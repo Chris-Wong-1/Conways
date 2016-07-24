@@ -1,0 +1,1 @@
+export default '<html><body><h1>Canvas source test</h1></body></html>';
