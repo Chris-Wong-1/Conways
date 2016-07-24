@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Canvas from './Canvas'
 import {
   // Any ReactNative Component Modules go here
   Text
@@ -7,9 +8,7 @@ import {
 class GameCanvas extends Component {
   render() {
     return (
-      <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-        Hello Conways
-      </Text>
+		<Canvas/>
     );
   }
 }
