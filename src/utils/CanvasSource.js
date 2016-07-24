@@ -1,1 +1,1 @@
-export default '<html><head><title>hexlife</title><meta http-equiv="content-type" content="text/html;charset=utf-8" /></head><body><button id="startbutton">Start</button><button id="stopbutton">Pause</button><button id="nextbutton">Next</button><button id="clearbutton">Clear</button><button id="randombutton">Random</button><canvas id="canvas" width="500" height="500"></body></html>';
+export default '<canvas id="c" width="1512" height="1512"></canvas>';
