@@ -11,7 +11,7 @@ class Canvas extends Component {
   render() {
     return (
       <WebView
-        html={CanvasSource}
+        source={{html: CanvasSource}}
         style={this.props.style}
         javaScriptEnabledAndroid={true}
       />
