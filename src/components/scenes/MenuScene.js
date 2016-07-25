@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View
+  View, StyleSheet, Image
 } from 'react-native';
 
 import Rules from '../Rules'
@@ -10,13 +10,21 @@ import BackButton from '../BackButton'
 class MenuScene extends Component {
   render() {
     return (
-      <View>
-        <Rules/>
+      <View style={styles.about}>
+        <Image source={require("../../../ConwaysPlainLogoChemTightCrop.png")}/>
         <About/>
-        <BackButton/>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  about: {
+    flex: 1,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingHorizontal: 50,
+  }
+});
 
 module.exports = MenuScene;
