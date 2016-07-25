@@ -23,9 +23,9 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var height = window.innerHeight;
 var width = window.innerWidth;
-var cellSize = 30;
-var cols = width/cellSize;
-var rows = height/cellSize;
+var cellSize = 10;
+var cols = Math.floor(width/cellSize) + 1
+var rows = Math.floor(height/cellSize) + 1
 
 var board = [];
 var i=0,j=0;
@@ -61,6 +61,16 @@ for(i=0; i<cols; i++) {
       }
     }
 
+    function clamp(c, boardc){
+      if (c<0){
+        return 0;
+      }
+      if (c>=boardc){
+        return boardc - 1;
+      }
+      return c;
+    }
+
     function renderShape(x, y, color) {
       ctx.fillStyle = color;
       ctx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize)
@@ -92,11 +102,16 @@ for(i=0; i<cols; i++) {
       }
     }
 
-    function pixelToTile(pixelx, pixely, width, height) {
+    function pixelToTile(pixelx, pixely, width, height, func) {
       var tiley = Math.floor(pixely/cellSize)
       var tilex = Math.floor(pixelx/cellSize)
+
+      tilex = func(tilex, width)
+      tiley = func(tiley, height)
+
       var pixely = tiley * cellSize;
       var pixelx = tilex * cellSize;
+
       return {x: pixelx, y: pixely, tilex: tilex, tiley: tiley}
     }
 
@@ -116,7 +131,7 @@ for(i=0; i<cols; i++) {
         var touches = evt.changedTouches;
         for(var i=0; i < touches.length; i++) {
             ongoingTouches.push(copyTouch(touches[i]));
-            var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, width, height)
+            var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
             setTileState(currentTile.tilex, currentTile.tiley, 1)
             renderShape(currentTile.tilex, currentTile.tiley, "black")
         }
@@ -132,6 +147,7 @@ for(i=0; i<cols; i++) {
       board[14][6] = 2;
       board[20][2] = 2;
     }
+
 `;
 
 export default Canvas;
