@@ -23,9 +23,10 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var height = window.innerHeight;
 var width = window.innerWidth;
-var cellSize = 20;
+var cellSize = 30;
 var cols = width/cellSize;
 var rows = height/cellSize;
+
 var board = [];
 var i=0,j=0;
 for(i=0; i<cols; i++) {
@@ -60,22 +61,32 @@ for(i=0; i<cols; i++) {
       }
     }
 
-    function drawShape(x, y, color) {
+    function renderShape(x, y, color) {
       ctx.fillStyle = color;
-      board[x][y] = 1;
       ctx.fillRect(x*cellSize, y*cellSize, cellSize, cellSize)
+    }
+
+    function setTileState(indexX, indexY, state) {
+      board[indexX][indexY] = state;
+    }
+
+
+
+    var colorHash = {
+      1: "black",
+      2: "blue",
+      3: "red"
+    }
+
+    function changeColors(theme) {
+      colorHash = theme;
     }
 
     var render = function() {
       for(s=0;s<board.length;s++) {
         for(e=0;e<board[s].length;e++) {
           if(board[s][e]!=0) {
-            if(board[s][e]==1) {
-              drawShape(s, e, "blue");
-            }
-            if(board[s][e]==2) {
-              drawShape(s, e, "purple");
-            }
+            renderShape(s, e, colorHash[board[s][e]]);
           }
         }
       }
@@ -106,19 +117,20 @@ for(i=0; i<cols; i++) {
         for(var i=0; i < touches.length; i++) {
             ongoingTouches.push(copyTouch(touches[i]));
             var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, width, height)
-            drawShape(currentTile.tilex, currentTile.tiley, "black")
+            setTileState(currentTile.tilex, currentTile.tiley, 1)
+            renderShape(currentTile.tilex, currentTile.tiley, "black")
         }
     }
 
     function changeBoard() {
-      board[5][6] = 2;
-      board[7][20] = 2;
-      board[10][6] = 2;
-      board[32][49] = 2;
-      board[1][6] = 1;
-      board[20][10] = 1;
-      board[14][6] = 1;
-      board[34][29] = 1;
+      board[5][6] = 3;
+      board[7][20] = 3;
+      board[10][6] = 3;
+      board[18][26] = 3;
+      board[1][6] = 2;
+      board[20][10] = 2;
+      board[14][6] = 2;
+      board[20][2] = 2;
     }
 `;
 
