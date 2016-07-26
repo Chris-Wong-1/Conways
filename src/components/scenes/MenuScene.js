@@ -11,8 +11,9 @@ class MenuScene extends Component {
   render() {
     return (
       <View style={styles.about}>
-        <Image source={require("../../../ConwaysPlainLogoChemTightCrop.png")}/>
+        <Image source={require("../../../ConwaysLogoTightCrop.png")}/>
         <About/>
+        <Rules/>
       </View>
     );
   }
@@ -21,7 +22,7 @@ class MenuScene extends Component {
 const styles = StyleSheet.create({
   about: {
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     paddingHorizontal: 50,
   }
