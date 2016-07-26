@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet
+  StyleSheet,
+  Navigator
 } from 'react-native';
 
 import RootController from './src/RootController'
+import LaunchScene from './src/components/scenes/LaunchScene'
 
 class Conways extends Component {
+  renderScene(route, navigator) {
+ if(route.name == 'LaunchScene') {
+   return <LaunchScene navigator={navigator} />
+ }
+ if(route.name == 'GameScene') {
+   return <GameScene navigator={navigator} />
+ }
+ if(route.name == 'MenuScene') {
+   return <MenuScene navigator={navigator} />
+ }
+}
   render() {
     return (
-      <RootController/>
-    );
+      <Navigator
+    style={{ flex:1 }}
+    initialRoute={{ name: 'LaunchScene' }}
+    renderScene={ this.renderScene } />    );
   }
 }
 
