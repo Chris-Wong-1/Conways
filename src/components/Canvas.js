@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import {WebView, Image, View, Dimensions} from 'react-native';
 import CanvasSource from '../utils/CanvasSource';
+import MenuButton from './MenuButton'
 
 class Canvas extends Component {
   render() {
     return (
+
       <WebView
         source={{html: CanvasSource}}
         style={this.props.style}
         javaScriptEnabledAndroid={true}
         injectedJavaScript={ canvasJS }
       />
+
     )
   }
 };
