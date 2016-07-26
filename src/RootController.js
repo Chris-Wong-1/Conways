@@ -1,34 +1,16 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  Navigator
+  AppRegistry
 } from 'react-native';
 
-import LaunchScene from './components/scenes/GameScene'
-
+import GameScene from './components/scenes/GameScene'
 
 class RootController extends Component {
-  renderScene(route, navigator) {
- if(route.name == 'LaunchScene') {
-   return <LaunchScene navigator={navigator} />
- }
- if(route.name == 'GameScene') {
-   return <GameScene navigator={navigator} />
- }
- if(route.name == 'MenuScene') {
-   return <MenuScene navigator={navigator} />
- }
-}
-
-
-render() {
-  return (
-    <Navigator
-  style={{ flex:1 }}
-  initialRoute={{ name: 'LaunchScene' }}
-  renderScene={ this.renderScene } />
-  )
-}
+  render() {
+    return (
+    	<GameScene/>
+    );
+  }
 }
 
 module.exports = RootController;
