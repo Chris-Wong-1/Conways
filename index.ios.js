@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
-  Navigator
+  Navigator,
+  TouchableHighlight,
+  Text
 } from 'react-native';
 
 import RootController from './src/RootController'
 import LaunchScene from './src/components/scenes/LaunchScene'
+import GameScene from './src/components/scenes/GameScene'
+import Rules from './src/components/Rules'
 
 class Conways extends Component {
   renderScene(route, navigator) {
@@ -19,6 +23,9 @@ class Conways extends Component {
  if(route.name == 'MenuScene') {
    return <MenuScene navigator={navigator} />
  }
+ if(route.name == 'Rules') {
+   return <Rules navigator={navigator} />
+ }
 }
   render() {
     return (
@@ -29,23 +36,23 @@ class Conways extends Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#F5FCFF',
-//   },
-//   welcome: {
-//     fontSize: 20,
-//     textAlign: 'center',
-//     margin: 10,
-//   },
-//   instructions: {
-//     textAlign: 'center',
-//     color: '#333333',
-//     marginBottom: 5,
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+});
 
 AppRegistry.registerComponent('Conways', () => Conways);
