@@ -23,11 +23,11 @@ class MenuButton extends Component {
   }
     render() {
       return (
-        <View>
+        <View style={{flex: 1}}>
           <TouchableHighlight
             style={styles.submit}
             onPress={ () => this._navigate()}>
-            <Text style={styles.submitText}>Menu</Text>
+            <Text style={styles.submitText}>Rules</Text>
           </TouchableHighlight>
         </View>
       );
@@ -47,15 +47,16 @@ const styles = StyleSheet.create({
 
   },
   submit:{
-  marginRight:40,
-  marginLeft:40,
-  marginTop:400,
+  marginRight:100,
+  marginLeft:100,
+  marginTop:130,
   paddingTop:20,
   paddingBottom:20,
   backgroundColor:'red',
   borderRadius:10,
   borderWidth: 1,
-  borderColor: '#fff'
+  borderColor: '#fff',
+  height: 40,
 },
 submitText:{
     color:'#fff',
