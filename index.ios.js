@@ -11,6 +11,7 @@ import RootController from './src/RootController'
 import LaunchScene from './src/components/scenes/LaunchScene'
 import GameScene from './src/components/scenes/GameScene'
 import Rules from './src/components/Rules'
+import About from './src/components/About'
 
 class Conways extends Component {
   renderScene(route, navigator) {
@@ -25,6 +26,9 @@ class Conways extends Component {
  }
  if(route.name == 'Rules') {
    return <Rules navigator={navigator} />
+ }
+ if(route.name == 'About') {
+   return <About navigator={navigator} />
  }
 }
   render() {
