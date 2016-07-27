@@ -47,16 +47,17 @@ const styles = StyleSheet.create({
 
   },
   submit:{
-  marginRight:100,
-  marginLeft:100,
-  marginTop:130,
-  paddingTop:20,
-  paddingBottom:20,
-  backgroundColor:'red',
-  borderRadius:10,
-  borderWidth: 1,
-  borderColor: '#fff',
-  height: 40,
+  // marginRight:110,
+  // marginLeft:100,
+  // marginTop:200,
+  paddingTop:20,//yes
+  paddingBottom:20,//yes
+  backgroundColor:'red',//yes
+  borderRadius:10, //yes
+  borderWidth: 1, // yes
+  borderColor: '#fff',//maybe depending on the screen backgroundColor
+  width: 180,
+  height: 60,
 },
 submitText:{
     color:'#fff',
