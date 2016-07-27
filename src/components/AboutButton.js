@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {
-  // Any ReactNative Component Modules go here
-  Text,
-  View,
   TouchableHighlight,
   StyleSheet
 } from 'react-native';
 
 import About from './About'
+import { View, Text } from 'react-native-animatable';
+
 
 
 class AboutButton extends Component {
@@ -20,7 +19,7 @@ class AboutButton extends Component {
   }
     render() {
       return (
-        <View style={{flex: 1}}>
+        <View animation="slideInUp" style={{flex: 1}}>
           <TouchableHighlight
             style={styles.submit}
             onPress={ () => this._navigate()}>
