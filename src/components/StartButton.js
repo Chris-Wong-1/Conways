@@ -51,15 +51,17 @@ const styles = StyleSheet.create({
 
   },
   submit:{
-  marginRight:100,
-  marginLeft:100,
-  marginTop:650,
+  // marginRight:110,
+  // marginLeft:100,
+  // marginTop:650,
   paddingTop:20,
   paddingBottom:20,
   backgroundColor:'red',
   borderRadius:10,
   borderWidth: 1,
-  borderColor: '#fff'
+  borderColor: '#fff',
+  width: 180,
+  height: 60,
 },
 submitText:{
     color:'#fff',
