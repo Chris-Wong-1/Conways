@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { WebView, View, StyleSheet } from 'react-native';
 
 import BackButton from '../BackButton'
-import CanvasSource from '../../utils/CanvasSource'
+import CanvasSource from '../CanvasSource'
 
 class GameScene extends Component {
   render() {

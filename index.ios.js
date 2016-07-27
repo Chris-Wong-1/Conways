@@ -7,7 +7,6 @@ import {
   Text
 } from 'react-native';
 
-import RootController from './src/RootController'
 import LaunchScene from './src/components/scenes/LaunchScene'
 import GameScene from './src/components/scenes/GameScene'
 import Rules from './src/components/Rules'
