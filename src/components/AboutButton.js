@@ -7,17 +7,14 @@ import {
   StyleSheet
 } from 'react-native';
 
-import Rules from './Rules'
+import About from './About'
 
 
-class MenuButton extends Component {
+class AboutButton extends Component {
   _navigate(){
-
-    console.log(this.props.passingNavigator)
-
     this.props.passingNavigator.push({
-      component: Rules,
-      name: 'Rules',
+      component: About,
+      name: 'About',
 
     })
   }
@@ -27,7 +24,7 @@ class MenuButton extends Component {
           <TouchableHighlight
             style={styles.submit}
             onPress={ () => this._navigate()}>
-            <Text style={styles.submitText}>Rules</Text>
+            <Text style={styles.submitText}>About</Text>
           </TouchableHighlight>
         </View>
       );
@@ -49,21 +46,24 @@ const styles = StyleSheet.create({
   submit:{
   // marginRight:110,
   // marginLeft:100,
-  // marginTop:200,
-  paddingTop:20,//yes
-  paddingBottom:20,//yes
-  backgroundColor:'red',//yes
-  borderRadius:10, //yes
-  borderWidth: 1, // yes
-  borderColor: '#fff',//maybe depending on the screen backgroundColor
+  // marginTop:120,
+  // paddingTop:20,
+  // paddingBottom:20,
+  // marginBottom:40,
+  backgroundColor:'red',
+  borderRadius:10,
+  borderWidth: 1,
+  borderColor: '#fff',
   width: 180,
   height: 60,
+  justifyContent: 'center',
 },
 submitText:{
+
     color:'#fff',
     textAlign:'center',
 },
 });
 
 
-module.exports = MenuButton;
+module.exports = AboutButton;
