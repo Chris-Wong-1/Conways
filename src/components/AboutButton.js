@@ -12,9 +12,6 @@ import About from './About'
 
 class AboutButton extends Component {
   _navigate(){
-
-    console.log(this.props.passingNavigator)
-
     this.props.passingNavigator.push({
       component: About,
       name: 'About',
@@ -47,18 +44,22 @@ const styles = StyleSheet.create({
 
   },
   submit:{
-  marginRight:100,
-  marginLeft:100,
-  marginTop:130,
-  paddingTop:5,
-  paddingBottom:20,
+  // marginRight:110,
+  // marginLeft:100,
+  // marginTop:120,
+  // paddingTop:20,
+  // paddingBottom:20,
+  // marginBottom:40,
   backgroundColor:'red',
   borderRadius:10,
   borderWidth: 1,
   borderColor: '#fff',
-  height: 40,
+  width: 180,
+  height: 60,
+  justifyContent: 'center',
 },
 submitText:{
+
     color:'#fff',
     textAlign:'center',
 },
