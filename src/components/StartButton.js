@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import{
   AppRegistry,
   StyleSheet,
-  Text,
-  View,
   TouchableHighlight,
-  Image,
-  WebView,
   Navigator
 } from 'react-native';
 
 import GameScene from './scenes/GameScene'
+import { View, Text } from 'react-native-animatable';
 
 class StartButton extends Component {
 
@@ -27,7 +24,7 @@ _navigate(){
 }
   render() {
     return (
-      <View>
+      <View animation="slideInUp">
         <TouchableHighlight
           style={styles.submit}
           onPress={ () => this._navigate()}>

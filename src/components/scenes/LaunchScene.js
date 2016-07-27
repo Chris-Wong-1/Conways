@@ -8,15 +8,17 @@ import {
 
 } from 'react-native';
 
-import Title from '../Title'
-import StartButton from '../StartButton'
-import MenuButton from '../MenuButton'
+
+import Title from '../Title';
+import StartButton from '../StartButton';
+import MenuButton from '../MenuButton';
+
 
 class LaunchScene extends Component {
   render() {
     return (
     	<View style={styles.home}>
-    
+
         <View>
           <StartButton passingNavigator={this.props.navigator}/>
         </View>
