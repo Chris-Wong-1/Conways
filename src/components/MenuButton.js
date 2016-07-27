@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import {
+  // Any ReactNative Component Modules go here
+  Text,
+  View,
   TouchableHighlight,
   StyleSheet
 } from 'react-native';
 
 import Rules from './Rules'
-import { View, Text } from 'react-native-animatable';
 
 
 class MenuButton extends Component {
   _navigate(){
+
+    console.log(this.props.passingNavigator)
 
     this.props.passingNavigator.push({
       component: Rules,
@@ -19,7 +23,7 @@ class MenuButton extends Component {
   }
     render() {
       return (
-        <View animation="slideInUp" style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <TouchableHighlight
             style={styles.submit}
             onPress={ () => this._navigate()}>
