@@ -27,12 +27,21 @@ var cellSize = 10;
 var cols = Math.floor(width/cellSize) + 1
 var rows = Math.floor(height/cellSize) + 1
 var yCoordMenu = (rows-5)*cellSize;
-var run = true;
+var run = false;
 
 var colorHash = {
-  1: "grey",
-  2: "blue",
-  3: "red"
+  0: "#edd6f3",
+  1: "#D29BE2",
+  2: "#E175FF",
+  3: "#ECA7FF",
+  4: "#C908FF",
+  5: "#FF00D7",
+  6: "#9B10FF",
+  7: "#FF00D7",
+  8: "#BC01F0",
+  9: "#FF00D7",
+  10: "#9D25F3",
+  11: "#FF00D7"
 }
 
 var board = [];
@@ -108,9 +117,7 @@ var render = function() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   for(s=0;s<board.length;s++) {
     for(e=0;e<(board[s].length);e++) {
-      if(board[s][e]>0) {
-        renderShape(s, e, colorHash[board[s][e]]);
-      }
+      renderShape(s, e, colorHash[board[s][e]]);
     }
   }
   drawMenu()
@@ -158,7 +165,7 @@ function handleStart(evt) {
       } else {
         ongoingTouches.push(copyTouch(touches[i]));
         var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
-        setTileState(currentTile.tilex, currentTile.tiley, 1)
+        setTileState(currentTile.tilex, currentTile.tiley, 2)
         if(!run) {
           render()
         }
@@ -187,11 +194,13 @@ function handleTaps(evt) {
 }
 
 function isAlive(cell) {
- if (cell > 0) {
-   return true
- }else {
-   return false
- }
+ if (cell === 0) {
+   return "dead";
+  } else if (cell === 1) {
+    return "wasAlive";
+  } else {
+   return "alive";
+  }
 }
 
 function getNeighborCoordinates(x, y) {
@@ -216,25 +225,35 @@ function getNeighborCoordinates(x, y) {
 function countNeighbors(coordinates, oldBoard) {
   var neighborCount = 0;
     coordinates.forEach(function(coordinatePair){
-      if(isAlive(oldBoard[coordinatePair.x][coordinatePair.y])) {
+      if(isAlive(oldBoard[coordinatePair.x][coordinatePair.y]) === "alive") {
         neighborCount++
       }
     })
   return neighborCount;
 }
 
+function randomColor() {
+  return Math.floor((Math.random() * 11) + 4);
+}
+
 function neighborRules(count, alive) {
-  if(alive) {
+  if(alive === "alive") {
     if(count < 2) {
-      return 0;
-    } else if(count===2 || count===3){
       return 1;
+    } else if(count===2 || count===3){
+      return randomColor();
     } else if(count > 3) {
-      return 0;
+      return 1;
+    }
+  } else if(alive === "wasAlive") {
+    if(count == 3) {
+      return randomColor();
+    } else {
+      return 1;
     }
   } else {
     if(count == 3) {
-      return 1;
+      return randomColor();
     } else {
       return 0;
     }
