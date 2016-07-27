@@ -8,15 +8,15 @@ Project design focused on the classic version of Conway's Game of Life, with ins
 ## Incorporated User Stories
 - A user can touch the screen to generate new live cells and interact with the game as it evolves
 - A user can expect responsive performance from the game
-
-## Currently In Development
 - A user can open the app and see a landing screen with logo and styles
 - A user can push a start button on the landing screen to reveal the game
-- A user can hear music associated with the growth or decay of their colonies
 - A user sees a border-less game menu allowing start/pause/reset functionality
 - A user can access an about page from the landing screen
 - A user can access a rules explanation page from the landing screen
 - A user can see colored and styled cells while playing the game
+
+## Currently In Development
+- A user can hear music associated with the growth or decay of their colonies
 
 ## Our Team
 - [Chris Wong](https://github.com/Chris-Wong-1/ "Chris Wong")
