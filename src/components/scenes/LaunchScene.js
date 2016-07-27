@@ -18,7 +18,10 @@ class LaunchScene extends Component {
   render() {
     return (
     	<View style={styles.home}>
-        <View>
+        <View style={{flex: 2}}>
+          <Text>Dummy</Text>
+        </View>
+        <View style={{flex: 1}}>
           <StartButton passingNavigator={this.props.navigator}/>
           <MenuButton passingNavigator={this.props.navigator}/>
           <AboutButton passingNavigator={this.props.navigator}/>
@@ -30,10 +33,9 @@ class LaunchScene extends Component {
 
 const styles = StyleSheet.create({
 home:{
-  flexDirection: "column",
   flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
+  justifyContent: 'flex-end', // changes alignment along main axis
+  alignItems: 'center', // change alignment perpendicular to main axis
 }
 });
 
