@@ -26,9 +26,26 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var height = window.innerHeight;
 var width = window.innerWidth;
-var cellSize = 20;
+var cellSize = 10;
 var cols = Math.floor(width/cellSize) + 1
 var rows = Math.floor(height/cellSize) + 1
+var yCoordMenu = (rows-5)*cellSize;
+var run = false;
+
+var colorHash = {
+  0: "#edd6f3",
+  1: "#D29BE2",
+  2: "#E175FF",
+  3: "#ECA7FF",
+  4: "#C908FF",
+  5: "#FF00D7",
+  6: "#9B10FF",
+  7: "#FF00D7",
+  8: "#BC01F0",
+  9: "#FF00D7",
+  10: "#9D25F3",
+  11: "#FF00D7"
+}
 
 var board = [];
 var i=0,j=0;
@@ -44,7 +61,6 @@ var body = document.getElementById('bod')
 body.style.margin = 0;
 body.style.padding = 0;
 
-var canvas = document.getElementById('canvas')
 context = canvas.getContext('2d');
 window.addEventListener('resize', resizeCanvas, false);
 
@@ -62,6 +78,17 @@ function drawStuff() {
       ctx.strokeRect(x*(cellSize), y*(cellSize), cellSize, cellSize)
     }
   }
+}
+
+function drawMenu() {
+  topOfMenu = (rows-5)*cellSize;
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle="#272627";
+  ctx.fillRect(0,topOfMenu,width,(cellSize*5))
+  ctx.fill()
+  ctx.globalAlpha = 1.0;
+
+
 }
 
 function clamp(c, boardc){
@@ -83,11 +110,7 @@ function setTileState(indexX, indexY, state) {
   board[indexX][indexY] = state;
 }
 
-var colorHash = {
-  1: "black",
-  2: "blue",
-  3: "red"
-}
+
 
 function changeColors(theme) {
   colorHash = theme;
@@ -96,15 +119,11 @@ function changeColors(theme) {
 var render = function() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   for(s=0;s<board.length;s++) {
-    for(e=0;e<board[s].length;e++) {
-      if(board[s][e]!=0) {
-        renderShape(s, e, colorHash[board[s][e]]);
-      }
-      if(board[s][e]===0){
-        // ctx.strokeRect(x*(cellSize), y*(cellSize), cellSize, cellSize)
-      }
+    for(e=0;e<(board[s].length);e++) {
+      renderShape(s, e, colorHash[board[s][e]]);
     }
   }
+  drawMenu()
 }
 
 function pixelToTile(pixelx, pixely, width, height, func) {
@@ -120,7 +139,7 @@ function pixelToTile(pixelx, pixely, width, height, func) {
   return {x: pixelx, y: pixely, tilex: tilex, tiley: tiley}
 }
 
-canvas.addEventListener("touchstart", handleStart, false);
+canvas.addEventListener("touchstart", handleTaps, false);
 canvas.addEventListener("touchend", handleStart, false);
 canvas.addEventListener("touchcancel", handleStart, false);
 canvas.addEventListener("touchmove", handleStart, false);
@@ -132,22 +151,59 @@ function copyTouch(touch) {
 
 function handleStart(evt) {
     evt.preventDefault();
-    var ctx = canvas.getContext("2d");
+    var touches = evt.changedTouches;
+    for(var i=0; i < touches.length; i++) {
+      if(touches[i].pageY >= yCoordMenu) {
+        if(touches[i].pageX<= width/2) {
+          if(run===true) {
+            run = false
+          } else {
+            run = true;
+          }
+        }
+        if(touches[i].pageX > width/2) {
+          clearBoardState()
+          render()
+        }
+      } else {
+        ongoingTouches.push(copyTouch(touches[i]));
+        var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+        setTileState(currentTile.tilex, currentTile.tiley, 2)
+        if(!run) {
+          render()
+        }
+      }
+    }
+}
+
+function clearBoardState() {
+  var x=0,
+      y=0;
+  for(x=0;x<board.length;x++) {
+    for(y=0;y<(board[x].length);y++) {
+      board[x][y]=0;
+    }
+  }
+}
+
+function handleTaps(evt) {
+    evt.preventDefault();
     var touches = evt.changedTouches;
     for(var i=0; i < touches.length; i++) {
         ongoingTouches.push(copyTouch(touches[i]));
         var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
         setTileState(currentTile.tilex, currentTile.tiley, 1)
-        renderShape(currentTile.tilex, currentTile.tiley, "black")
     }
 }
 
 function isAlive(cell) {
- if (cell > 0) {
-   return true
- }else {
-   return false
- }
+ if (cell === 0) {
+   return "dead";
+  } else if (cell === 1) {
+    return "wasAlive";
+  } else {
+   return "alive";
+  }
 }
 
 function getNeighborCoordinates(x, y) {
@@ -172,25 +228,35 @@ function getNeighborCoordinates(x, y) {
 function countNeighbors(coordinates, oldBoard) {
   var neighborCount = 0;
     coordinates.forEach(function(coordinatePair){
-      if(isAlive(oldBoard[coordinatePair.x][coordinatePair.y])) {
+      if(isAlive(oldBoard[coordinatePair.x][coordinatePair.y]) === "alive") {
         neighborCount++
       }
     })
   return neighborCount;
 }
 
+function randomColor() {
+  return Math.floor((Math.random() * 11) + 4);
+}
+
 function neighborRules(count, alive) {
-  if(alive) {
+  if(alive === "alive") {
     if(count < 2) {
-      return 0;
-    } else if(count===2 || count===3){
       return 1;
+    } else if(count===2 || count===3){
+      return randomColor();
     } else if(count > 3) {
-      return 0;
+      return 1;
+    }
+  } else if(alive === "wasAlive") {
+    if(count == 3) {
+      return randomColor();
+    } else {
+      return 1;
     }
   } else {
     if(count == 3) {
-      return 1;
+      return randomColor();
     } else {
       return 0;
     }
@@ -213,10 +279,17 @@ function step(gBoard) {
   return newBoard;
 }
 
+
 setInterval(function() {
-  board = step(board);
-  render();
-}, 100);
+  if(run) {
+    increment()
+  }
+}, 100)
+
+function increment() {
+  board = step(board)
+  render()
+}
 
 `;
 
