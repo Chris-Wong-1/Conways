@@ -26,9 +26,17 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var height = window.innerHeight;
 var width = window.innerWidth;
-var cellSize = 20;
+var cellSize = 10;
 var cols = Math.floor(width/cellSize) + 1
 var rows = Math.floor(height/cellSize) + 1
+var yCoordMenu = (rows-5)*cellSize;
+var run = true;
+
+var colorHash = {
+  1: "grey",
+  2: "blue",
+  3: "red"
+}
 
 var board = [];
 var i=0,j=0;
@@ -44,7 +52,6 @@ var body = document.getElementById('bod')
 body.style.margin = 0;
 body.style.padding = 0;
 
-var canvas = document.getElementById('canvas')
 context = canvas.getContext('2d');
 window.addEventListener('resize', resizeCanvas, false);
 
@@ -62,6 +69,17 @@ function drawStuff() {
       ctx.strokeRect(x*(cellSize), y*(cellSize), cellSize, cellSize)
     }
   }
+}
+
+function drawMenu() {
+  topOfMenu = (rows-5)*cellSize;
+  ctx.globalAlpha = 0.3;
+  ctx.fillStyle="#272627";
+  ctx.fillRect(0,topOfMenu,width,(cellSize*5))
+  ctx.fill()
+  ctx.globalAlpha = 1.0;
+
+
 }
 
 function clamp(c, boardc){
@@ -83,11 +101,7 @@ function setTileState(indexX, indexY, state) {
   board[indexX][indexY] = state;
 }
 
-var colorHash = {
-  1: "black",
-  2: "blue",
-  3: "red"
-}
+
 
 function changeColors(theme) {
   colorHash = theme;
@@ -96,15 +110,13 @@ function changeColors(theme) {
 var render = function() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   for(s=0;s<board.length;s++) {
-    for(e=0;e<board[s].length;e++) {
-      if(board[s][e]!=0) {
+    for(e=0;e<(board[s].length);e++) {
+      if(board[s][e]>0) {
         renderShape(s, e, colorHash[board[s][e]]);
-      }
-      if(board[s][e]===0){
-        // ctx.strokeRect(x*(cellSize), y*(cellSize), cellSize, cellSize)
       }
     }
   }
+  drawMenu()
 }
 
 function pixelToTile(pixelx, pixely, width, height, func) {
@@ -120,7 +132,7 @@ function pixelToTile(pixelx, pixely, width, height, func) {
   return {x: pixelx, y: pixely, tilex: tilex, tiley: tiley}
 }
 
-canvas.addEventListener("touchstart", handleStart, false);
+canvas.addEventListener("touchstart", handleTaps, false);
 canvas.addEventListener("touchend", handleStart, false);
 canvas.addEventListener("touchcancel", handleStart, false);
 canvas.addEventListener("touchmove", handleStart, false);
@@ -132,13 +144,48 @@ function copyTouch(touch) {
 
 function handleStart(evt) {
     evt.preventDefault();
-    var ctx = canvas.getContext("2d");
+    var touches = evt.changedTouches;
+    for(var i=0; i < touches.length; i++) {
+      if(touches[i].pageY >= yCoordMenu) {
+        if(touches[i].pageX<= width/2) {
+          if(run===true) {
+            run = false
+          } else {
+            run = true;
+          }
+        }
+        if(touches[i].pageX > width/2) {
+          clearBoardState()
+          render()
+        }
+      } else {
+        ongoingTouches.push(copyTouch(touches[i]));
+        var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+        setTileState(currentTile.tilex, currentTile.tiley, 1)
+        if(!run) {
+          render()
+        }
+      }
+    }
+}
+
+function clearBoardState() {
+  var x=0,
+      y=0;
+  for(x=0;x<board.length;x++) {
+    for(y=0;y<(board[x].length);y++) {
+      board[x][y]=0;
+    }
+  }
+}
+
+function handleTaps(evt) {
+    evt.preventDefault();
     var touches = evt.changedTouches;
     for(var i=0; i < touches.length; i++) {
         ongoingTouches.push(copyTouch(touches[i]));
         var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
         setTileState(currentTile.tilex, currentTile.tiley, 1)
-        renderShape(currentTile.tilex, currentTile.tiley, "black")
     }
 }
 
@@ -213,10 +260,17 @@ function step(gBoard) {
   return newBoard;
 }
 
+
 setInterval(function() {
-  board = step(board);
-  render();
-}, 100);
+  if(run) {
+    increment()
+  }
+}, 100)
+
+function increment() {
+  board = step(board)
+  render()
+}
 
 `;
 
