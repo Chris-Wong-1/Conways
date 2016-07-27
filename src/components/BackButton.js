@@ -7,18 +7,16 @@ import {
 import LaunchScene from './scenes/LaunchScene'
 
 class BackButton extends Component {
-back() {
-  this.props.passingNavigator.push({
-    component: LaunchScene,
-    name: 'LaunchScene',
-
+_navigate(){
+  this.props.passingNavigator.pop({
+ 
   })
 }
   render() {
     return (
       <TouchableHighlight
           style={styles.clearStyle}
-          onPress={() => this.back()}>
+          onPress={() => this._navigate()}>
            <Text style={styles.button}>Main Menu</Text>
          </TouchableHighlight>
     );
@@ -27,7 +25,7 @@ back() {
 
 const styles = StyleSheet.create({
   clearStyle: {
-    // empty to force newly rendered TouchableHighlight 
+    // empty to force newly rendered TouchableHighlight
     // to have no style instead of cached version?
   },
   button: {
