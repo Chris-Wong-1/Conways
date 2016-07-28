@@ -19,7 +19,7 @@ class About extends Component {
         <Text style={styles.back}>back</Text>
       </TouchableHighlight>
       <Text style={styles.about}>
-        Conways is inspired by John Horton Conway's cellular automaton; the "Game of Life". As an artistic retelling of the fabled zero-player game, Conways combines music, art, and modern technological poetry to simulate Life based on four simple rules.
+      Conways is inspired by John Horton Conway's cellular automaton; the 'Game of Life'. As an artistic retelling of the fabled zero-player game, Conways combines music, art, and modern technological poetry to simulate Life based on four simple rules.
       </Text>
       </View>
     );
