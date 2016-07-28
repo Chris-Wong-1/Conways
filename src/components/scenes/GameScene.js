@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { WebView, View, StyleSheet } from 'react-native';
 
-import BackButton from '../BackButton'
-import CanvasSource from '../CanvasSource'
+import BackButton from '../BackButton';
+import CanvasSource from '../CanvasSource';
+var Sound = require('react-native-sound');
 
 class GameScene extends Component {
   render() {
@@ -13,6 +14,7 @@ class GameScene extends Component {
           </View>
           <View style={styles.webview}>
             <WebView
+              onLoad={this.playSound}
               source={{html: CanvasSource}}
               style={this.props.style}
               javaScriptEnabledAndroid={true}
@@ -20,10 +22,18 @@ class GameScene extends Component {
             />
          </View>
       </View>
-
     );
   }
-}
+  playSound() {
+    var s = new Sound('Visager_Final_Sacrifice_Loop.mp3', Sound.MAIN_BUNDLE, (e) => {
+      if (e) {
+        console.log('not working', e);
+      } else {
+        s.play();
+      }
+    });
+  }
+};
 
 
 const styles = StyleSheet.create({

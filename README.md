@@ -14,9 +14,12 @@ Project design focused on the classic version of Conway's Game of Life, with ins
 - A user can access an about page from the landing screen
 - A user can access a rules explanation page from the landing screen
 - A user can see colored and styled cells while playing the game
+- A user can hear music associated with the growth or decay of their colonies
 
 ## Currently In Development
-- A user can hear music associated with the growth or decay of their colonies
+- A user can pick different cell sizes from the in-game menu
+- A user can select from themes for cell colors
+- A user can select different simulation speeds for the game
 
 ## Our Team
 - [Chris Wong](https://github.com/Chris-Wong-1/ "Chris Wong")
