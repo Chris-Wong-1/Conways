@@ -12,15 +12,15 @@ class GameScene extends Component {
             <BackButton passingNavigator={this.props.navigator}/>
           </View>
           <View style={styles.webview}>
-            <WebView 
-              source={{html: CanvasSource}} 
-              style={this.props.style} 
-              javaScriptEnabledAndroid={true} 
+            <WebView
+              source={{html: CanvasSource}}
+              style={this.props.style}
+              javaScriptEnabledAndroid={true}
               injectedJavaScript={ canvasJS }
             />
          </View>
       </View>
-    
+
     );
   }
 }
@@ -47,11 +47,14 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var height = window.innerHeight;
 var width = window.innerWidth;
-var cellSize = 10;
+var cellSize = 15;
 var cols = Math.floor(width/cellSize) + 1
 var rows = Math.floor(height/cellSize) + 1
-var yCoordMenu = (rows-5)*cellSize;
+var yCoordMenu = (rows-4)*cellSize;
 var run = false;
+var showMenu = true;
+var leftDivider = width/5;
+var rightDivider = width - leftDivider;
 
 var colorHash = {
   0: "#edd6f3",
@@ -77,7 +80,6 @@ for(i=0; i<=cols; i++) {
   }
 }
 
-
 var body = document.getElementById('bod')
 body.style.margin = 0;
 body.style.padding = 0;
@@ -86,30 +88,45 @@ context = canvas.getContext('2d');
 window.addEventListener('resize', resizeCanvas, false);
 
 function resizeCanvas() {
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-drawStuff();
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
 
 resizeCanvas();
 
-function drawStuff() {
-  for(x=0; x<cols; x++) {
-    for(y=0; y<rows; y++) {
-      ctx.strokeRect(x*(cellSize), y*(cellSize), cellSize, cellSize)
+function isHit(hit, hitbox) {
+  (hit.x < hitbox.xx && hit.x > hitbox.x && hit.y < hitbox.yy && hit.y > hitbox.y) ? true : false
+}
+
+function clearBoardState() {
+  var x=0,
+      y=0;
+  for(x=0;x<board.length;x++) {
+    for(y=0;y<(board[x].length);y++) {
+      board[x][y]=0;
     }
   }
 }
 
+var menuLine = {
+  xCoord: leftDivider,
+  yCoord: yCoordMenu,
+  sHeight: height-yCoordMenu,
+  sWidth: 6
+}
+
 function drawMenu() {
-  topOfMenu = (rows-5)*cellSize;
-  ctx.globalAlpha = 0.3;
+  ctx.globalAlpha = 0.5;
   ctx.fillStyle="#272627";
-  ctx.fillRect(0,topOfMenu,width,(cellSize*5))
+  ctx.fillRect(0,yCoordMenu,width,(cellSize*6))
   ctx.fill()
-  ctx.globalAlpha = 1.0;
 
+  ctx.globalAlpha = 0.7;
+  ctx.fillStyle = "#f0f0f1";
+  ctx.fillRect(menuLine.xCoord, menuLine.yCoord, menuLine.sWidth, menuLine.sHeight)
+  ctx.fillRect(width-menuLine.xCoord, menuLine.yCoord, menuLine.sWidth, menuLine.sHeight)
 
+  ctx.globalAlpha = 1.0
 }
 
 function clamp(c, boardc){
@@ -144,7 +161,9 @@ var render = function() {
       renderShape(s, e, colorHash[board[s][e]]);
     }
   }
-  drawMenu()
+  if(showMenu || !run) {
+    drawMenu()
+  }
 }
 
 function pixelToTile(pixelx, pixely, width, height, func) {
@@ -163,58 +182,78 @@ function pixelToTile(pixelx, pixely, width, height, func) {
 canvas.addEventListener("touchstart", handleTaps, false);
 canvas.addEventListener("touchend", handleStart, false);
 canvas.addEventListener("touchcancel", handleStart, false);
-canvas.addEventListener("touchmove", handleStart, false);
+canvas.addEventListener("touchmove", handleMove, false);
 
 var ongoingTouches = new Array();
 function copyTouch(touch) {
     return { identifier: touch.identifier, pageX: touch.pageX, pageY: touch.pageY };
 }
+function onMenu() {
+  if(showMenu) {
+    setTimeout(function() {
+      showMenu = false;
+      timer = false;
+    }, 3000)
+  }
+  showMenu = true;
+}
 
 function handleStart(evt) {
-    evt.preventDefault();
-    var touches = evt.changedTouches;
-    for(var i=0; i < touches.length; i++) {
+  evt.preventDefault();
+  var touches = evt.changedTouches;
+  for(var i=0; i < touches.length; i++) {
       if(touches[i].pageY >= yCoordMenu) {
-        if(touches[i].pageX<= width/2) {
+        onMenu();
+        if(touches[i].pageX<= leftDivider) {
           if(run===true) {
-            run = false
+            run = false;
           } else {
             run = true;
           }
         }
-        if(touches[i].pageX > width/2) {
+        if(touches[i].pageX > rightDivider) {
           clearBoardState()
           render()
+          run = false;
         }
       } else {
         ongoingTouches.push(copyTouch(touches[i]));
         var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
-        setTileState(currentTile.tilex, currentTile.tiley, 2)
+        if(touches[i].pageY < yCoordMenu) {
+          setTileState(currentTile.tilex, currentTile.tiley, 2)
+        }
         if(!run) {
           render()
         }
       }
-    }
-}
-
-function clearBoardState() {
-  var x=0,
-      y=0;
-  for(x=0;x<board.length;x++) {
-    for(y=0;y<(board[x].length);y++) {
-      board[x][y]=0;
-    }
   }
 }
 
 function handleTaps(evt) {
-    evt.preventDefault();
-    var touches = evt.changedTouches;
-    for(var i=0; i < touches.length; i++) {
-        ongoingTouches.push(copyTouch(touches[i]));
-        var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
-        setTileState(currentTile.tilex, currentTile.tiley, 1)
+  evt.preventDefault();
+  var touches = evt.changedTouches;
+  for(var i=0; i < touches.length; i++) {
+    ongoingTouches.push(copyTouch(touches[i]));
+    var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+    if(touches[i].pageY < yCoordMenu) {
+      setTileState(currentTile.tilex, currentTile.tiley, 2)
+    } else {
+      onMenu()
     }
+  }
+}
+
+function handleMove(evt) {
+  evt.preventDefault();
+  var touches = evt.changedTouches;
+  for(var i=0; i < touches.length; i++) {
+    ongoingTouches.push(copyTouch(touches[i]));
+    var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+      setTileState(currentTile.tilex, currentTile.tiley, 2)
+    if(!run) {
+      render()
+    }
+  }
 }
 
 function isAlive(cell) {
@@ -304,6 +343,8 @@ function step(gBoard) {
 setInterval(function() {
   if(run) {
     increment()
+  } else {
+    showMenu = true
   }
 }, 100)
 
@@ -311,6 +352,7 @@ function increment() {
   board = step(board)
   render()
 }
+render()
 
 `;
 
