@@ -10,5 +10,5 @@
     "react-native": "0.30.0",
     "react-native-animatable": "^0.6.1",
     "react-native-sound": "^0.8.3"
-  },
+  }
 }

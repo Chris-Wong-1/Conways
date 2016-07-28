@@ -4,6 +4,17 @@ import { WebView, View, StyleSheet } from 'react-native';
 import BackButton from '../BackButton'
 import CanvasSource from '../CanvasSource'
 
+var Sound = require('react-native-sound');
+var music = new Sound('Visager_Final_Sacrifice_Loop.mp3', Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load the sound', error);
+  } else {
+    console.log('duration in seconds:' + music.getDuration() + 'number of channels: ' + music.getNumberOfChannels());
+  }
+});
+
+music.play();
+
 class GameScene extends Component {
   render() {
     return (
