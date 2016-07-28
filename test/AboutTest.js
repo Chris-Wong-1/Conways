@@ -11,7 +11,7 @@ describe('<About/>', () => {
   it('should have a back button', () => {
     expect(wrapper.find(TouchableHighlight)).to.have.length(1);
   })
-  it('should have two text components', () => {
-    expect(wrapper.find(Text)).to.have.length(2);
+  it('should have six text components', () => {
+    expect(wrapper.find(Text)).to.have.length(6);
   })
 })
