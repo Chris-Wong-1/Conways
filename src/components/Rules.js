@@ -13,13 +13,14 @@ class Rules extends Component {
           <TouchableHighlight
             style={styles.Menu}
             onPress={ () => this._navigate()}>
-            <Text style={styles.back}>back</Text>
+            <Text style={styles.back}>BACK</Text>
           </TouchableHighlight>
+          <Text style={styles.header}>Rules</Text>
           <Text style={styles.rules}>
-            The board is a grid of cells, your touch brings life to every cell you contact.
-            If an alive cell has less than 2 living neighbors, it dies. Loneliness.
-            If an alive cell has greater than 3 living neighbors, it dies. Suffocation.
-            If an alive cell has exactly 2 or 3 living neighbors, it lives. Survival.
+            The board is a grid of cells, your touch brings life to every cell you contact.{"\n"}{"\n"}
+            If an alive cell has less than 2 living neighbors, it dies. Loneliness.{"\n"}{"\n"}
+            If an alive cell has greater than 3 living neighbors, it dies. Suffocation.{"\n"}{"\n"}
+            If an alive cell has exactly 2 or 3 living neighbors, it lives. Survival.{"\n"}{"\n"}
             If a dead cell has exactly 3 living neighbors, it comes to life. Creation.
           </Text>
       </View>
@@ -27,13 +28,21 @@ class Rules extends Component {
   }
 }
 const styles = StyleSheet.create({
+  header:{
+    fontSize: 24,
+    fontFamily: "Futura",
+    textDecorationLine: "underline",
+    textAlign: "center",
+  },
   rules:{
     fontSize: 16,
-    paddingTop: 10,
-    marginTop: 60
+    fontFamily: "Helvetica",
+    margin: 20,
   },
   back:{
-    marginTop:10
+    fontSize: 18,
+    fontFamily: "Futura",
+    margin:20
   }
 
 });
