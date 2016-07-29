@@ -118,50 +118,50 @@ var rectHeight = (height - (height-yCoordMenu)) - (height - (height - yCoordMenu
 var cornerRadius = 20;
 
 var colorHash = {
-  0: "#edd6f3",
+  0: "#EDD6F3",
   1: "#D29BE2",
   2: "#E175FF",
   3: "#ECA7FF",
   4: "#C908FF",
   5: "#FF00D7",
   6: "#9B10FF",
-  7: "#FF00D7",
-  8: "#BC01F0",
-  9: "#FF00D7",
-  10: "#9D25F3",
-  11: "#FF00D7"
+  7: "#BC01F0",
+  8: "#9D25F3"
 }
 
 var colorHashes = {
   1: {
-    0: "#edd6f3",
+    0: "#EDD6F3",
     1: "#D29BE2",
     2: "#E175FF",
     3: "#ECA7FF",
     4: "#C908FF",
     5: "#FF00D7",
     6: "#9B10FF",
-    7: "#FF00D7",
-    8: "#BC01F0",
-    9: "#FF00D7",
-    10: "#9D25F3",
-    11: "#FF00D7"
+    7: "#BC01F0",
+    8: "#9D25F3"
   },
   2: {
-    0: "#000033",
-    1: "#0d0033",
-    2: "#1a0033",
-    3: "#260033",
-    4: "#330033",
-    5: "#330026",
-    6: "#33001a",
-    7: "#33000d",
-    8: "#330000",
-    9: "#000d33",
-    10: "#001a33",
-    11: "#002633"
+    0: "#A1FB56",
+    1: "#83EA83",
+    2: "#00CC00",
+    3: "#67E300",
+    4: "#00AF64",
+    5: "#00FF92",
+    6: "#5FD101",
+    7: "#5FD101",
+    8: "#009153"
   },
   3: {
+    0: "#FFFFFF",
+    1: "#D7D7D7",
+    2: "#161616",
+    3: "#4D4C4C",
+    4: "#565656",
+    5: "#292929",
+    6: "#040303",
+    7: "#636363",
+    8: "#2E2E2E"
   }
 }
 
@@ -548,7 +548,7 @@ function countNeighbors(coordinates, oldBoard) {
 }
 
 function randomColor() {
-  return Math.floor((Math.random() * 11) + 4);
+  return Math.floor((Math.random() * 8) + 4);
 }
 
 function neighborRules(count, alive) {
