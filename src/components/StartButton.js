@@ -28,11 +28,10 @@ _navigate(){
         <TouchableHighlight
           style={styles.submit}
           onPress={ () => this._navigate()}>
-            <Text style={styles.submitText}>Play</Text>
+            <Text style={styles.submitText}>PLAY</Text>
         </TouchableHighlight>
       </View>
     );
-
   }
 }
 
@@ -45,26 +44,24 @@ const styles = StyleSheet.create({
   },
   logo:{
     textAlign: 'center',
-
   },
   submit:{
-  // marginRight:110,
-  // marginLeft:100,
-  // marginTop:650,
-  paddingTop:20,
-  paddingBottom:20,
-  backgroundColor:'red',
-  borderRadius:10,
-  borderWidth: 1,
-  borderColor: '#fff',
-  width: 180,
-  height: 60,
-},
-submitText:{
+    paddingTop:20,
+    paddingBottom:20,
+    backgroundColor:'#E175FF',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff',
+    width: 180,
+    height: 60,
+  },
+  submitText:{
+    fontSize: 20,
+    fontFamily: "Futura",
+    fontWeight: 'bold',
     color:'#fff',
     textAlign:'center',
-},
+  },
 });
-
 
 module.exports = StartButton;

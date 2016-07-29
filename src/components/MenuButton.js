@@ -23,7 +23,7 @@ class MenuButton extends Component {
           <TouchableHighlight
             style={styles.submit}
             onPress={ () => this._navigate()}>
-            <Text style={styles.submitText}>Rules</Text>
+            <Text style={styles.submitText}>RULES</Text>
           </TouchableHighlight>
         </View>
       );
@@ -43,22 +43,22 @@ const styles = StyleSheet.create({
 
   },
   submit:{
-  // marginRight:110,
-  // marginLeft:100,
-  // marginTop:200,
-  paddingTop:20,//yes
-  paddingBottom:20,//yes
-  backgroundColor:'red',//yes
-  borderRadius:10, //yes
-  borderWidth: 1, // yes
-  borderColor: '#fff',//maybe depending on the screen backgroundColor
-  width: 180,
-  height: 60,
-},
-submitText:{
+    paddingTop:20,//yes
+    paddingBottom:20,//yes
+    backgroundColor:'#E175FF',//yes
+    borderRadius:10, //yes
+    borderWidth: 1, // yes
+    borderColor: '#fff',
+    width: 180,
+    height: 60,
+  },
+  submitText:{
+    fontSize: 20,
+    fontFamily: "Futura",
+    fontWeight: 'bold',
     color:'#fff',
-    textAlign:'center',
-},
+    textAlign:'center'
+  },
 });
 
 
