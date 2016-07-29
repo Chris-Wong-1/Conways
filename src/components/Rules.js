@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Text, ListView,StyleSheet, View,TouchableHighlight} from 'react-native';
+import {Text, ListView,StyleSheet, WebView, View, TouchableHighlight, Image} from 'react-native';
 
 class Rules extends Component {
   _navigate(){
@@ -17,11 +17,12 @@ class Rules extends Component {
           </TouchableHighlight>
           <Text style={styles.header}>RULES</Text>
           <Text style={styles.rules}>
-            The board is a grid of cells, your touch brings life to every cell you contact.{"\n"}{"\n"}
-            If an alive cell has less than 2 living neighbors, it dies. Loneliness.{"\n"}{"\n"}
-            If an alive cell has greater than 3 living neighbors, it dies. Suffocation.{"\n"}{"\n"}
-            If an alive cell has exactly 2 or 3 living neighbors, it lives. Survival.{"\n"}{"\n"}
-            If a dead cell has exactly 3 living neighbors, it comes to life. Creation.
+            The board is a grid of cells, your touch brings life to every cell you contact.{"\n"}{"\n"}{"\n"}
+            1. If an alive cell has less than 2 living neighbors, it dies. Loneliness.{"\n"}{"\n"}
+            2. If an alive cell has greater than 3 living neighbors, it dies. Suffocation.{"\n"}{"\n"}
+            3. If an alive cell has exactly 2 or 3 living neighbors, it lives. Survival.{"\n"}{"\n"}
+            4. If a dead cell has exactly 3 living neighbors, it comes to life. Creation.{"\n"}{"\n"}{"\n"}
+            Patterns of surviving "still" life and movement will regularly appear as you play! See if you can find them all!!
           </Text>
       </View>
     );
