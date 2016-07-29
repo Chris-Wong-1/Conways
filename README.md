@@ -15,11 +15,40 @@ Project design focused on the classic version of Conway's Game of Life, with ins
 - A user can access a rules explanation page from the landing screen
 - A user can see colored and styled cells while playing the game
 - A user can hear music associated with the growth or decay of their colonies
-
-## Currently In Development
 - A user can pick different cell sizes from the in-game menu
 - A user can select from themes for cell colors
-- A user can select different simulation speeds for the game
+
+## Required Packages
+List may be out of date, trust the development branch *package.json*
+
+### For Development
+- node.js (and npm)
+- react
+- react-native
+- react-native-sound
+- react-native-animatable
+- Apple XCode
+
+### For Testing
+- babel-core
+- babel-preset-react-native
+- enzyme
+- chai
+- mocha
+- react-addons-test-utils
+- react-dom
+- react-native-mock
+
+## Installation
+1. `git clone https://github.com/Chris-Wong-1/Conways.git`
+2. cd to the Conways directory
+3. `npm install`
+4. `react-native run-ios` for iOS simulation
+
+## Running Tests
+Package.json should contain a script specification for npm allowing you to run `npm test`
+to run the test suite with Mocha and Enzyme. More sophisticated testing (of game logic) is unsupported
+due to the nature of how the game script is injected onto the canvas HTML5 element contained in GameScene's WebView component. Future builds will hopefully support this feature, please feel free to create an issue and tag the team if interested!
 
 ## Our Team
 - [Chris Wong](https://github.com/Chris-Wong-1/ "Chris Wong")
