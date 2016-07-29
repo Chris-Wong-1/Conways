@@ -15,7 +15,7 @@ class Rules extends Component {
             onPress={ () => this._navigate()}>
             <Text style={styles.back}>BACK</Text>
           </TouchableHighlight>
-          <Text style={styles.header}>Rules</Text>
+          <Text style={styles.header}>RULES</Text>
           <Text style={styles.rules}>
             The board is a grid of cells, your touch brings life to every cell you contact.{"\n"}{"\n"}
             If an alive cell has less than 2 living neighbors, it dies. Loneliness.{"\n"}{"\n"}
