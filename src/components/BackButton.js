@@ -17,7 +17,7 @@ _navigate(){
       <TouchableHighlight
           style={styles.clearStyle}
           onPress={() => this._navigate()}>
-           <Text style={styles.button}>Main Menu</Text>
+           <Text style={styles.button}>MENU</Text>
          </TouchableHighlight>
     );
   }
@@ -29,8 +29,10 @@ const styles = StyleSheet.create({
     // to have no style instead of cached version?
   },
   button: {
-    fontWeight: 'bold',
-    textAlign: 'right'
+    fontSize: 14,
+    fontFamily: "Futura",
+    textAlign: 'right',
+    marginLeft: 10
   }
 })
 
