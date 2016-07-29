@@ -47,14 +47,65 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var height = window.innerHeight;
 var width = window.innerWidth;
-var cellSize = 15;
+var cellSize = 6;
+var speed = 100;
 var cols = Math.floor(width/cellSize) + 1
 var rows = Math.floor(height/cellSize) + 1
-var yCoordMenu = (rows-4)*cellSize;
+var yCoordMenu = height - height/15;
 var run = false;
 var showMenu = true;
 var leftDivider = width/5;
 var rightDivider = width - leftDivider;
+var middle = width/2;
+var brightFeatureButton = false;
+var menuUp = false;
+
+
+var featureState = {
+  "Speed": 2,
+  "Cell Size": 1,
+  "Theme": 1,
+  "Mode": 2
+}
+
+var menuLine = {
+  xCoord: leftDivider,
+  yCoord: yCoordMenu,
+  sHeight: height-yCoordMenu,
+  sWidth: 2
+}
+
+var playTriangleX = leftDivider/2 - leftDivider/4;
+var playTriangleY = yCoordMenu + menuLine.sHeight/4
+var playTrianglePointX = playTriangleX + leftDivider/4;
+var playTrianglePointY = playTriangleY + menuLine.sHeight/4
+var playTriangleEndY = playTriangleY + menuLine.sHeight/2
+
+var clearButton = {
+  middleX: width-((width-rightDivider)/4),
+  middleXX: width-((width-rightDivider)/2)
+}
+
+var pauseButton = {
+  firstBarX: leftDivider/2,
+  firstBarY: playTriangleY,
+  secondBarX: leftDivider/2 + leftDivider/10,
+  barWidth: 5,
+  barHeight: menuLine.sHeight/2
+}
+
+var middleTriangle = {
+  leftPoint: middle-middle/6,
+  rightPoint: middle+middle/6,
+  triangleBottom: playTriangleEndY,
+  triangleTop: playTriangleEndY-height/36
+}
+
+var rectX = width/9;
+var rectY = (height - (height - yCoordMenu))/15;
+var rectWidth = width - width/4.6;
+var rectHeight = (height - (height-yCoordMenu)) - (height - (height - yCoordMenu))/8;
+var cornerRadius = 20;
 
 var colorHash = {
   0: "#edd6f3",
@@ -69,6 +120,39 @@ var colorHash = {
   9: "#FF00D7",
   10: "#9D25F3",
   11: "#FF00D7"
+}
+
+var colorHashes = {
+  1: {
+    0: "#edd6f3",
+    1: "#D29BE2",
+    2: "#E175FF",
+    3: "#ECA7FF",
+    4: "#C908FF",
+    5: "#FF00D7",
+    6: "#9B10FF",
+    7: "#FF00D7",
+    8: "#BC01F0",
+    9: "#FF00D7",
+    10: "#9D25F3",
+    11: "#FF00D7"
+  },
+  2: {
+    0: "#000033",
+    1: "#0d0033",
+    2: "#1a0033",
+    3: "#260033",
+    4: "#330033",
+    5: "#330026",
+    6: "#33001a",
+    7: "#33000d",
+    8: "#330000",
+    9: "#000d33",
+    10: "#001a33",
+    11: "#002633"
+  },
+  3: {
+  }
 }
 
 var board = [];
@@ -92,10 +176,19 @@ function resizeCanvas() {
   canvas.height = window.innerHeight;
 }
 
-resizeCanvas();
-
-function isHit(hit, hitbox) {
-  (hit.x < hitbox.xx && hit.x > hitbox.x && hit.y < hitbox.yy && hit.y > hitbox.y) ? true : false
+function recalcColRow() {
+  height = window.innerHeight;
+  width = window.innerWidth;
+  cols = Math.floor(width/cellSize) + 1
+  rows = Math.floor(height/cellSize) + 1
+  board = [];
+  var i=0,j=0;
+  for(i=0; i<=cols; i++) {
+    board[i] = [];
+    for(j=0; j<=rows; j++) {
+      board[i][j] = 0;
+    }
+  }
 }
 
 function clearBoardState() {
@@ -108,25 +201,177 @@ function clearBoardState() {
   }
 }
 
-var menuLine = {
-  xCoord: leftDivider,
-  yCoord: yCoordMenu,
-  sHeight: height-yCoordMenu,
-  sWidth: 6
-}
-
 function drawMenu() {
   ctx.globalAlpha = 0.5;
   ctx.fillStyle="#272627";
-  ctx.fillRect(0,yCoordMenu,width,(cellSize*6))
-  ctx.fill()
+  ctx.fillRect(0,yCoordMenu,width,120)
 
-  ctx.globalAlpha = 0.7;
   ctx.fillStyle = "#f0f0f1";
   ctx.fillRect(menuLine.xCoord, menuLine.yCoord, menuLine.sWidth, menuLine.sHeight)
   ctx.fillRect(width-menuLine.xCoord, menuLine.yCoord, menuLine.sWidth, menuLine.sHeight)
 
+  ctx.beginPath()
+  ctx.moveTo(playTriangleX, playTriangleY)
+  ctx.lineTo(playTrianglePointX-5, playTrianglePointY)
+  ctx.lineTo(playTriangleX,playTriangleEndY)
+  ctx.closePath()
+
+  ctx.fillRect(pauseButton.firstBarX, pauseButton.firstBarY, pauseButton.barWidth, pauseButton.barHeight)
+  ctx.fillRect(pauseButton.secondBarX, pauseButton.firstBarY, pauseButton.barWidth, pauseButton.barHeight)
+  ctx.moveTo(middleTriangle.leftPoint,middleTriangle.triangleBottom)
+  ctx.lineTo(middleTriangle.rightPoint, middleTriangle.triangleBottom)
+  ctx.lineTo(middle, middleTriangle.triangleTop)
+  ctx.lineTo(middleTriangle.leftPoint,middleTriangle.triangleBottom)
+  ctx.fill()
+
+  ctx.beginPath()
+  ctx.strokeStyle="#f0f0f1";
+  ctx.moveTo(clearButton.middleX-width/45, (height-height/20)+2);
+  ctx.lineTo(clearButton.middleXX-width/45, (height-height/45)+2);
+  ctx.moveTo(clearButton.middleX-width/45, (height-height/45)+2);
+  ctx.lineTo(clearButton.middleXX-width/45, (height-height/20)+2)
+  ctx.lineWidth=4
+  ctx.stroke();
+  ctx.closePath()
+
   ctx.globalAlpha = 1.0
+}
+
+function drawFeatureMenu() {
+  run = false;
+  ctx.globalAlpha = 0.2;
+  ctx.fillStyle="#000000"
+  ctx.fillRect(0,0,width, height)
+  ctx.globalAlpha = 0.85;
+  ctx.strokeStyle="#332c2c"
+  ctx.fillStyle = colorHash[0];
+  ctx.lineJoin = "round";
+  ctx.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+  ctx.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+  ctx.globalAlpha = 1.0
+  menuItem("Speed", 180, 180, 3, featureState["Speed"], true)
+  menuItem("Cell Size", 180, 250, 3, featureState["Cell Size"], true)
+  menuItem("Theme", 180, 320, 3, featureState["Theme"], false)
+  menuItem("Mode", 180, 390, 3, featureState["Mode"], false)
+  ctx.textAlign = "center";
+  ctx.fillText("back", middle, 500)
+}
+
+var menuItemCoords = {}
+
+var cellSizes = {
+  1: 20,
+  2: 10,
+  3: 5
+}
+
+function checkState() {
+  changeColors(colorHashes[featureState["Theme"]])
+  if(cellSize != cellSizes[featureState["Cell Size"]]) {
+    cellSize = cellSizes[featureState["Cell Size"]];
+    resizeCanvas()
+    recalcColRow()
+    render()
+  }
+}
+
+var pickSquareX = {
+  1: (width/2)+width/10,
+  2: (width/2)+2*(width/10),
+  3: (width/2)+3*(width/10),
+  4: (width/2)+4*(width/10),
+}
+
+function menuItem(text, x, y, num, hMany, fill) {
+  cell = 8;
+  ctx.textAlign = "right"
+  ctx.globalAlpha = 1.0
+  ctx.font = "30px Futura";
+  ctx.fillStyle=colorHash[2];
+  ctx.strokeStyle = "#332c2c"
+  ctx.fillText(text, x, y)
+  ctx.lineWidth = "1px"
+  i=1;
+  while(i<=num) {
+    if(i<=hMany) {
+      if(fill) {
+        ctx.fillRect(pickSquareX[i], y+5, -4*cell, -4*cell)
+      } else {
+        if(i===hMany) {
+          ctx.fillRect(pickSquareX[i], y+5, -4*cell, -4*cell)
+        }
+      }
+    }
+    ctx.strokeRect(pickSquareX[i], y+5, -4*cell, -4*cell)
+    if(!menuItemCoords[text]) {
+      menuItemCoords[text] = {}
+    }
+      if(!menuItemCoords[text][i]) {
+        menuItemCoords[text][i] = {
+          x: pickSquareX[i],
+          y: y+5,
+          xx: pickSquareX[i]+(-4*cell),
+          yy: (y+5)-4*cell
+        }
+      }
+    i++;
+  }
+}
+
+function isHit(x,y, hitbox) {
+  return (x > hitbox.xx && x < hitbox.x && y > hitbox.yy && y < hitbox.y) ? true : false
+}
+
+var exitMenuY = height-height/4;
+
+
+function handleStart(evt) {
+  evt.preventDefault();
+  var touches = evt.changedTouches;
+  for(var i=0; i < touches.length; i++) {
+    if(menuUp) {
+      if(touches[i].pageY >= exitMenuY) {
+        menuUp = false;
+        render()
+      }
+      for(var boxRow in menuItemCoords) {
+        for(var box in menuItemCoords[boxRow]) {
+          if(isHit(touches[i].pageX, touches[i].pageY, menuItemCoords[boxRow][box])) {
+            featureState[boxRow] = parseInt(box);
+            checkState()
+            render()
+          }
+        }
+      }
+    } else {
+      if(touches[i].pageY >= yCoordMenu) {
+        onMenu();
+        if(touches[i].pageX <= leftDivider) {
+          if(run===true) {
+            run = false;
+          } else {
+            run = true;
+          }
+        } else if(touches[i].pageX > rightDivider) {
+          clearBoardState()
+          render()
+          run = false;
+        } else {
+            menuUp = true
+          render()
+        }
+      } else {
+        ongoingTouches.push(copyTouch(touches[i]));
+        var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+        if(touches[i].pageY < yCoordMenu) {
+          setTileState(currentTile.tilex, currentTile.tiley, 2)
+        }
+        if(!run) {
+          render()
+        }
+      }
+    }
+  }
 }
 
 function clamp(c, boardc){
@@ -148,10 +393,9 @@ function setTileState(indexX, indexY, state) {
   board[indexX][indexY] = state;
 }
 
-
-
 function changeColors(theme) {
   colorHash = theme;
+  render()
 }
 
 var render = function() {
@@ -163,6 +407,9 @@ var render = function() {
   }
   if(showMenu || !run) {
     drawMenu()
+    if(menuUp) {
+      drawFeatureMenu()
+    }
   }
 }
 
@@ -198,34 +445,28 @@ function onMenu() {
   showMenu = true;
 }
 
-function handleStart(evt) {
+function handleTaps(evt) {
   evt.preventDefault();
   var touches = evt.changedTouches;
   for(var i=0; i < touches.length; i++) {
-      if(touches[i].pageY >= yCoordMenu) {
-        onMenu();
-        if(touches[i].pageX<= leftDivider) {
-          if(run===true) {
-            run = false;
-          } else {
-            run = true;
+    if(menuUp) {
+      console.log("you are at least here taps")
+      for(var boxRow in menuItemCoords) {
+        for(var box in menuItemCoords[boxRow]) {
+          if(isHit(touches[i].pageX, touches[i].pageY, menuItemCoords[boxRow][box])) {
+            console.log(menuItemCoords[boxRow][box])
           }
         }
-        if(touches[i].pageX > rightDivider) {
-          clearBoardState()
-          render()
-          run = false;
-        }
-      } else {
-        ongoingTouches.push(copyTouch(touches[i]));
-        var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
-        if(touches[i].pageY < yCoordMenu) {
-          setTileState(currentTile.tilex, currentTile.tiley, 2)
-        }
-        if(!run) {
-          render()
-        }
       }
+    }
+    ongoingTouches.push(copyTouch(touches[i]));
+    var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+    if(touches[i].pageY < yCoordMenu) {
+      setTileState(currentTile.tilex, currentTile.tiley, 2)
+    } else {
+      onMenu()
+      render()
+    }
   }
 }
 
@@ -239,6 +480,7 @@ function handleTaps(evt) {
       setTileState(currentTile.tilex, currentTile.tiley, 2)
     } else {
       onMenu()
+      render()
     }
   }
 }
@@ -323,7 +565,6 @@ function neighborRules(count, alive) {
   }
 }
 
-
 function step(gBoard) {
   newBoard = [];
   x = 0;
@@ -339,19 +580,20 @@ function step(gBoard) {
   return newBoard;
 }
 
-
 setInterval(function() {
   if(run) {
     increment()
   } else {
     showMenu = true
   }
-}, 100)
+}, speed)
 
 function increment() {
   board = step(board)
   render()
 }
+
+resizeCanvas();
 render()
 
 `;
