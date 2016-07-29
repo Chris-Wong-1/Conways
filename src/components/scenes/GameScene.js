@@ -75,7 +75,7 @@ var featureState = {
   "Speed": 2,
   "Cell Size": 1,
   "Theme": 1,
-  "Mode": 2
+  "Presets": 0
 }
 
 var menuLine = {
@@ -174,6 +174,99 @@ for(i=0; i<=cols; i++) {
   }
 }
 
+function setBoard(boardSetup) {
+  boardSetup()
+  render()
+}
+
+function set(x,y) {
+  board[x+2][y+2] = 2
+}
+
+var boardHash = {
+  0: function() {
+    clearBoardState()
+  },
+  1: function() {
+    clearBoardState()
+    set(1,5)
+    set(1,6)
+    set(2,5)
+    set(2,6)
+    set(11,5)
+    set(11,6)
+    set(11,7)
+    set(12,4)
+    set(12,8)
+    set(13,3)
+    set(13,9)
+    set(14,3)
+    set(14,9)
+    set(15,6)
+    set(16,4)
+    set(16,8)
+    set(17,5)
+    set(17,6)
+    set(17,7)
+    set(18,6)
+    set(21,3)
+    set(21,4)
+    set(21,5)
+    set(22,3)
+    set(22,4)
+    set(22,5)
+    set(23,2)
+    set(23,6)
+    set(25,1)
+    set(25,2)
+    set(25,6)
+    set(25,7)
+    set(35,3)
+    set(35,4)
+    set(36,3)
+    set(36,4)
+  },
+  2: function() {
+    clearBoardState()
+    set(30,101)
+    set(31,101)
+    set(31,100)
+    set(30,100)
+    set(29,98)
+    set(30,98)
+    set(31,98)
+    set(32,98)
+    set(28,97)
+    set(29,97)
+    set(32,97)
+    set(33,97)
+    set(27,96)
+    set(34,96)
+    set(27,94)
+    set(34,94)
+    set(27,93)
+    set(29,93)
+    set(32,93)
+    set(34,93)
+    set(30,92)
+    set(31,92)
+    set(30,91)
+    set(31,91)
+    set(28,90)
+    set(29,90)
+    set(32,90)
+    set(33,90)
+  },
+  3: function() {
+    clearBoardState()
+    set(45,50)
+    set(44,49)
+    set(45,49)
+    set(45,48)
+    set(46,48)
+  }
+}
+
 var body = document.getElementById('bod')
 body.style.margin = 0;
 body.style.padding = 0;
@@ -262,7 +355,7 @@ function drawFeatureMenu() {
   menuItem("Speed", 180, 180, 3, featureState["Speed"], true)
   menuItem("Cell Size", 180, 250, 3, featureState["Cell Size"], true)
   menuItem("Theme", 180, 320, 3, featureState["Theme"], false)
-  menuItem("Mode", 180, 390, 3, featureState["Mode"], false)
+  menuItem("Presets", 180, 390, 3, featureState["Presets"], false)
   ctx.textAlign = "center";
   ctx.fillText("back", middle, 500)
 }
@@ -283,6 +376,7 @@ function checkState() {
     recalcColRow()
     render()
   }
+  setBoard(boardHash[featureState["Presets"]])
 }
 
 var pickSquareX = {
@@ -460,37 +554,21 @@ function handleTaps(evt) {
   var touches = evt.changedTouches;
   for(var i=0; i < touches.length; i++) {
     if(menuUp) {
-      console.log("you are at least here taps")
       for(var boxRow in menuItemCoords) {
         for(var box in menuItemCoords[boxRow]) {
           if(isHit(touches[i].pageX, touches[i].pageY, menuItemCoords[boxRow][box])) {
-            console.log(menuItemCoords[boxRow][box])
           }
         }
       }
-    }
-    ongoingTouches.push(copyTouch(touches[i]));
-    var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
-    if(touches[i].pageY < yCoordMenu) {
-      setTileState(currentTile.tilex, currentTile.tiley, 2)
     } else {
-      onMenu()
-      render()
-    }
-  }
-}
-
-function handleTaps(evt) {
-  evt.preventDefault();
-  var touches = evt.changedTouches;
-  for(var i=0; i < touches.length; i++) {
-    ongoingTouches.push(copyTouch(touches[i]));
-    var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
-    if(touches[i].pageY < yCoordMenu) {
-      setTileState(currentTile.tilex, currentTile.tiley, 2)
-    } else {
-      onMenu()
-      render()
+      ongoingTouches.push(copyTouch(touches[i]));
+      var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+      if(touches[i].pageY < yCoordMenu) {
+        setTileState(currentTile.tilex, currentTile.tiley, 2)
+      } else {
+        onMenu()
+        render()
+      }
     }
   }
 }
@@ -499,11 +577,13 @@ function handleMove(evt) {
   evt.preventDefault();
   var touches = evt.changedTouches;
   for(var i=0; i < touches.length; i++) {
-    ongoingTouches.push(copyTouch(touches[i]));
-    var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
+    if (!menuUp) {
+      ongoingTouches.push(copyTouch(touches[i]));
+      var currentTile = pixelToTile(touches[i].pageX, touches[i].pageY, cols, rows, clamp)
       setTileState(currentTile.tilex, currentTile.tiley, 2)
-    if(!run) {
-      render()
+      if(!run) {
+        render()
+      }
     }
   }
 }
@@ -605,6 +685,7 @@ function increment() {
 
 resizeCanvas();
 render()
+
 
 `;
 
