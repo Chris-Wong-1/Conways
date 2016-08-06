@@ -1,9 +1,9 @@
 ![Conways](https://github.com/Chris-Wong-1/Conways/raw/development/ConwaysLogoTightCrop.png)
 ## Description
-Built as a capstone final project at DevBootcamp, a 9-week immersive coding school, Conways is a React Native mobile artistic experience combining Conway's Game of Life with music, color, and user control! The app revolves around simulation of cellular/colony style growth, propagation, survival, and digital death!
+Built as a capstone final project at DevBootcamp, a 19-week immersive coding school, Conways is a React Native mobile artistic experience combining Conway's Game of Life with music, color, and user control! The app revolves around simulation of cellular/colony style growth, propagation, survival, and digital death!
 
 ## Design
-Project design focused on the classic version of Conway's Game of Life, with inspired modern elements. The base game is made with React Native, utilizing HTML5's Canvas element and Vanilla JS to calculate growth & death, drawing the game board in real time via a WebView component loading local assets.
+Project design focused on the classic version of Conway's Game of Life, with inspired modern elements. The base game is made with React Native, utilizing HTML5's Canvas element and vanilla JS to calculate growth & death, drawing the game board in real time with user touch events (via a WebView component loading local assets).
 
 ## Incorporated User Stories
 - A user can touch the screen to generate new live cells and interact with the game as it evolves
@@ -17,6 +17,20 @@ Project design focused on the classic version of Conway's Game of Life, with ins
 - A user can hear music associated with the growth or decay of their colonies
 - A user can pick different cell sizes from the in-game menu
 - A user can select from themes for cell colors
+- A user can adjust the speed of the simulation from the in-game menu (not fully implemented)
+
+## Screenshots
+### Landing and Rules
+<img src="https://raw.githubusercontent.com/Chris-Wong-1/Conways/development/readme_files/landing_ss.png" height="350" alt="Landing Screen">
+<img src="https://raw.githubusercontent.com/Chris-Wong-1/Conways/development/readme_files/rules_ss.png" height="350" alt="Rules Screen">
+
+### Base Gameplay
+In order; playing the game w/o adjusting settings, changing cell sizes via the modal menu, loading in preset cell configurations to play with, and changing themes
+
+<img src="https://raw.githubusercontent.com/Chris-Wong-1/Conways/development/readme_files/playing.gif" height="350" alt="Playing the Game">
+<img src="https://raw.githubusercontent.com/Chris-Wong-1/Conways/development/readme_files/cell_sizes.gif" height="350" alt="Adjusting Cell Size">
+<img src="https://raw.githubusercontent.com/Chris-Wong-1/Conways/development/readme_files/presets.gif" height="350" alt="Using Presets">
+<img src="https://raw.githubusercontent.com/Chris-Wong-1/Conways/development/readme_files/themes.gif" height="350" alt="Changing Themes">
 
 ## Required Packages
 List may be out of date, trust the development branch *package.json*
